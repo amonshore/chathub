@@ -1,5 +1,5 @@
-REST API
-========
+REST API v1.0
+=============
 
 ### POST /login
 esegue la login utente, valida la sessione
