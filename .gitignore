@@ -1,0 +1,9 @@
+.bowerrc
+*.sublime*
+.DS_Store
+data/
+node_modules/
+bower_components/
+*.log
+conf.json
+gulpconf.json

@@ -1,0 +1,59 @@
+{
+    "name": "chathub",
+    "version": "1.0.0",
+    "description": "web chat",
+    "main": "app.js",
+    "scripts": {
+        "start": "forever start -o out.log -e err.log app.js",
+        "stop": "forever stop app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/amonshore/chathub"
+    },
+    "keywords": [
+        "web",
+        "chat"
+    ],
+    "author": "narsen <not_amon-dev@yahoo.it>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/amonshore/chathub/issues"
+    },
+    "homepage": "https://github.com/amonshore/chathub#readme",
+    "dependencies": {
+        "body-parser": "^1.14.2",
+        "chalk": "^1.1.1",
+        "chokidar": "^1.6.0",
+        "dateformat": "^1.0.12",
+        "express": "^4.13.4",
+        "express-ws": "^2.0.0",
+        "lodash": "^4.3.0",
+        "mongoose": "^4.4.2",
+        "mustache-express": "^1.2.2",
+        "q": "^1.4.1",
+        "socket.io": "^1.4.8"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.11.4",
+        "babel-preset-es2015": "^6.9.0",
+        "del": "^2.2.1",
+        "eslint": "^3.3.1",
+        "eslint-config-standard": "^5.3.5",
+        "eslint-plugin-promise": "^2.0.0",
+        "eslint-plugin-standard": "^2.0.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^6.1.2",
+        "gulp-clean-css": "^2.0.12",
+        "gulp-concat": "^2.6.0",
+        "gulp-debug": "^2.1.2",
+        "gulp-ftp": "^1.1.0",
+        "gulp-plumber": "^1.1.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-sequence": "^0.4.5",
+        "gulp-sourcemaps": "^1.6.0",
+        "gulp-uglify": "^2.0.0",
+        "gulp-util": "^3.0.7",
+        "gulp-watch": "^4.3.9"
+    }
+}
