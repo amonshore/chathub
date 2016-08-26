@@ -17,13 +17,13 @@ crea un nuovo utente
 modifica un utente esistente, i parametri non inviati non verranno modificati, per eliminare l'avatar inviare { avatar: null }
 * => { name, password, avatar }
 * <= **200** { uid, name }
-* <= **403*+ non autorizzato, l'utente non è amministratore e non è :uid
-* <= **404*+ utente non trovato
+* <= **403** non autorizzato, l'utente non è amministratore e non è :uid
+* <= **404** utente non trovato
 
 ### GET /users/:uid/avatar
 restituisce l'avatar dell'utente, immagine codificata con base64
 * <= **200** { avatar }
-* <= **404*+ utente non trovato
+* <= **404** utente non trovato
 
 ### GET /contacts
 restituisce l'elenco dei contatti dell'utente in sessione (per ora tutti gli utenti)
