@@ -5,17 +5,29 @@ REST API v1.0
 esegue la login utente, valida la sessione
 * => { uid, password }
 * <= **200** { uid, name }
-* <= **403** non autorizzato
+* <= **401** non autorizzato
+
+### GET /whoami
+restituisce l'indicazione dell'utente in sessione
+* <= **200** { uid, name }
+* <= **404** non trovato
 
 ### PUT /users
 crea un nuovo utente
-* => { uid, name, password }
-* <= **200** { uid, name, avatar }
+* => { uid, name, password, avatar }
+* <= **200** { uid, name }
 * <= **400** uid o password non validi, uid già esistente, nome non valido
+* <= **403** non autorizzato, solo l'ammministratore può creare un utente amministratore
 
 ### POST /users/:uid
 modifica un utente esistente, i parametri non inviati non verranno modificati, per eliminare l'avatar inviare { avatar: null }
 * => { name, password, avatar }
+* <= **200** { uid, name }
+* <= **403** non autorizzato, l'utente non è amministratore e non è :uid, solo l'ammministratore può creare un utente amministratore
+* <= **404** utente non trovato
+
+### DELETE /users/:uid
+elimina un utente
 * <= **200** { uid, name }
 * <= **403** non autorizzato, l'utente non è amministratore e non è :uid
 * <= **404** utente non trovato
@@ -25,9 +37,14 @@ restituisce l'avatar dell'utente, immagine codificata con base64
 * <= **200** { avatar }
 * <= **404** utente non trovato
 
-### GET /contacts
-restituisce l'elenco dei contatti dell'utente in sessione (per ora tutti gli utenti)
+### GET /users/:uid/contacts
+restituisce l'elenco dei contatti dell'utente in sessione
 * <= **200** { contacts: [{ uid, name }] }
+
+### GET /users
+restituisce l'elenco degli utenti
+* <= **200** { contacts: [{ uid, name }] }
+* <= **403** non autorizzato, l'utente non è amministratore
 
 ### GET /chatrooms
 restituisce le chatroom a cui l'utente in sessione è iscritto
@@ -63,7 +80,7 @@ aggiunge uno o più utenti alla chatroom
 ### DELETE /chatrooms/:roomid/users/:uid
 rimuove un utente dalla chatroom
 * <= **200** { rommid, descr, owner, users: [{ uid, name }] }
-* <= **403** non autorizzato, solo l'amministratore o il proprietario della chatroom possono farlo
+* <= **403** non autorizzato, solo l'amministratore, il proprietario della chatroom o l'utente stesso possono farlo
 * <= **404** room non trovata, utente non trovato
 
 ### GET /chatrooms/:roomid/messages?from=:date&max=:max

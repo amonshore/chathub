@@ -13,7 +13,8 @@ const gulp = require('gulp'),
     sequence = require('gulp-sequence'),
     del = require('del'),
     spawn = require('child_process').spawn
-    os = require('os');
+    os = require('os'),
+    process = require('process');
 
 const jsLibs = [
     'bower_components/jquery/dist/jquery.min.js',
@@ -117,7 +118,7 @@ gulp.task('watch:js', () => {
 });
 
 gulp.task('watch:app', () => {
-    return gulp.watch('app.js')
+    return gulp.watch(['app.js', 'controllers/**/*.js'])
         .on('change', e => {
             gutil.log('app changed: restart...');
             const pr = spawn(os.platform() === 'win32' ? 'npm.cmd' : 'npm', ['restart']);
@@ -179,8 +180,13 @@ gulp.task('watch', [
     'watch:html',
     'watch:css', 'make:css',
     'watch:js', 'make:js',
-    'watch:img',
-    'watch:app'
+    'watch:img'/*,
+    'watch:app'*/
 ]);
 
 gulp.task('default', sequence('clean', 'prepare', 'watch'));
+
+// // intercetto la chiusura del processo gulp e chiudo anche l'applicazione
+// process.on('SIGINT', () => {
+//     spawn(os.platform() === 'win32' ? 'npm.cmd' : 'npm', ['stop']);
+// });
