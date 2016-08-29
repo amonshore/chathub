@@ -50,14 +50,6 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-// restituisce l'indicazione dell'utente in sessione
-app.get('/whoami', (req, res) => {
-    if (req.session.logged) {
-        res.json(_.pick(req.session.user, ['uid', 'name']));
-    } else {
-        res.status(404).send('Not found');
-    }
-});
 // login
 app.post('/login', (req, res) => {
     db.checkUser(req.body.uid, req.body.password)
@@ -80,6 +72,14 @@ app.post('/login', (req, res) => {
             res.status(400).json(db.parseError(err));
         });
 });
+// restituisce l'indicazione dell'utente in sessione
+app.get('/whoami', Ut.checkSession, (req, res) => {
+    if (req.session.logged) {
+        res.json(_.pick(req.session.user, ['uid', 'name']));
+    } else {
+        res.status(404).send('Not found');
+    }
+});
 // router
 app.use('/users', require('./controllers/restusers.js'));
 
@@ -94,3 +94,5 @@ db.init().then(() => {
 }).catch(err => {
     console.error(err);
 });
+
+module.exports = http;

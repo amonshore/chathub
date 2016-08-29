@@ -14,7 +14,7 @@ module.exports = {
         1001: "ValidationError",
         11000: "Duplicate key"
     },
-    
+
     /**
      * Elabora un errore restituito dal DB e ne restuituisce 
      * una versione edulcorata da informazioni non sicure.
